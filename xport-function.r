@@ -26,11 +26,13 @@ xport <- function(e=NA,y=NA){
             y <- as.numeric(names(table(dat$yr[dat$edon==e], useNA = "ifany"))[y])
         }
     #
-    # set data directory here
-    dd <- "/home/eric/Desktop/MXelsCalendGovt/elecReturns/data/"
+    ## # set data directory here --- SHOULD BE DONE OUTSIDE FUNCTION
+    ## dd <- "/home/eric/Desktop/MXelsCalendGovt/elecReturns/data/"
+    ## # read data with coalition aggregates file
+    ## dat <- read.csv(file = paste(dd, "aymu1989-present.coalAgg.csv", sep = ""), stringsAsFactors = FALSE)
     #
     # read data with coalition aggregates file
-    dat <- read.csv(file = paste(dd, "aymu1989-present.coalAgg.csv", sep = ""), stringsAsFactors = FALSE)
+    dat <- read.csv(file = "aymu1989-present.coalAgg.csv", stringsAsFactors = FALSE)
     #
     # subset data to selection
     dat <- dat[dat$edon==e & dat$yr==y,]
@@ -87,7 +89,7 @@ xport <- function(e=NA,y=NA){
     dat2 <- dat[, (max(sel.col)+1):ncol(dat)] # columns after  votes and labels
     #
     #  manipulated data
-    write.csv(cbind(dat1, vl, dat2), file = paste("../data/xport/", edos[e], y, "aymu.coalAgg.csv", sep = ""), row.names = FALSE)
+    write.csv(cbind(dat1, vl, dat2), file = "xport/aymu.coalAgg.csv", row.names = FALSE)
     #
     # Announce all went well
     paste(y, "municipal vote returns for", estados[e], "exported as", paste("xport/", edos[e], y, "aymu.coalAgg.csv", sep = ""))
