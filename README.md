@@ -18,13 +18,16 @@ Scripts containing (mostly) R code with functions useful for analysis
 
 Set a path to either web or disk where source files reside
 
+``` R
     pth <- ifelse (Sys.info()["user"] %in% c("eric", "magar"),
               "~/Dropbox/data/useful-functions",
               "https://raw.githubusercontent.com/emagar/useful-functions/master"
     )
+```
 
 then read desired function
 
+``` R
     # Reads sortBy function
     source( paste(pth, "sortBy.r", sep = "/") )
-
+```
