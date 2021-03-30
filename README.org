@@ -1,0 +1,19 @@
+* Description
+Scripts containing (mostly) R code with functions useful for analysis
+* Usage in R
+Set a path to either web or disk where source files reside
+
+#+BEGIN_SRC r-base
+pth <- ifelse (Sys.info()["user"] %in% c("eric", "magar"),
+          "~/Dropbox/data/useful-functions",
+          "https://raw.githubusercontent.com/emagar/useful-functions/master"
+)
+#+END_SRC
+
+then read desired function
+
+#+BEGIN_SRC r-base
+# Reads sortBy function
+source( paste(pth, "sortBy.r", sep = "/") )
+#+END_SRC
+
