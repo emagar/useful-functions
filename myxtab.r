@@ -9,7 +9,7 @@
 
 myxtab <- function(r=NA, c=NA, margin=1, rel=TRUE, pct=FALSE, marginals=TRUE, digits=1){
     tmp <- table(r,c)
-    pct <- ifelse(pct==TRUE, 100, 1)
+    pct <- ifelse(pct==FALSE | rel==FALSE, 1, 100)
     if (margin==1 & rel==TRUE  & marginals==TRUE)  tmp <- cbind(round(prop.table(tmp, margin)*pct, digits), tot=rep(pct, nrow(tmp)), N=margin.table(tmp, margin));
     if (margin==1 & rel==TRUE  & marginals==FALSE) tmp <-       round(prop.table(tmp, margin)*pct, digits);
     if (margin==1 & rel==FALSE & marginals==TRUE)  tmp <- cbind(                 tmp,                       tot=rowSums(tmp));
