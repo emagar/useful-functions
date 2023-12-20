@@ -15,6 +15,16 @@
 #############################################################################################
 
 moveme <- function (invec, movecommand) {
+    ## Usage:                                                 ##
+    ##   df[moveme(names(df), "g first")]                     ##
+    ##   df[moveme(names(df), "g first; a last; e before c")] ##
+    ##                                                        ##
+    ## The basic options are:                                 ##
+    ## - first                                                ##
+    ## - last                                                 ##
+    ## - before                                               ##
+    ## - after                                                ##
+    ## Compounded moves are separated by a semicolon.         ##
   movecommand <- lapply(strsplit(strsplit(movecommand, ";")[[1]], 
                                  ",|\\s+"), function(x) x[x != ""])
   movelist <- lapply(movecommand, function(x) {
