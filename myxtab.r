@@ -4,10 +4,13 @@
 ##                                               ##
 ## Author: Eric Magar emagar at itam dot mx      ##
 ## Created: 28may2021                            ##
-## Revised: 28may2021                            ##
+## Revised: 18apr2024                            ##
 ###################################################
 
 myxtab <- function(r=NA, c=NA, margin=1, rel=TRUE, pct=FALSE, marginals=TRUE, digits=1){
+    ## Tabulates with marginal quantities
+    ## Usage eg.: myxtab(r=d$nribs, c=d$sex, margin=2, rel=TRUE, pct=FALSE, marginals=TRUE)
+    ##
     tmp <- table(r,c)
     pct <- ifelse(pct==FALSE | rel==FALSE, 1, 100)
     if (margin==1 & rel==TRUE  & marginals==TRUE)  tmp <- cbind(round(prop.table(tmp, margin)*pct, digits), tot=rep(pct, nrow(tmp)), N=margin.table(tmp, margin));
