@@ -17,8 +17,8 @@ xport <- function(e = NA, y = NA, dat = c("aymu1970-on.coalAgg.csv", "aymu1970-o
     ##
 #    e <- 2; y <- 2019; dat <- c("aymu1970-on.coalAgg.csv", "aymu1970-on.coalSplit.csv")[1] # debug
     ## check if state requested in nim abbrev or full name
-    q <- e %in% c(edos, 1:32) # e==edon??
-    tmp <- grep(e, edos); if (length(tmp)>0) e <- grep(e, edos) # if char turn to num equivalent (edon)
+    ##q <- e %in% c(edos, 1:32) # e==edon??
+    ##tmp <- grep(e, edos); if (length(tmp)>0) e <- grep(e, edos) # if char turn to num equivalent (edon)
     ## ## this needs debuging
     ## if (q==FALSE) e <- menu(choices = edos, title = "Select a state") # prompt for state
     ## q <- y %in% as.numeric(names(table(dat$yr[dat$edon==e], useNA = "ifany")))
