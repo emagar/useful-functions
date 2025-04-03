@@ -23,3 +23,17 @@ edon2edo <- function(x){
     )
     return(edo)
 }
+##
+##
+edon2estado <- function(x){
+    edo <- mapvalues(
+        x,
+        from = 1:32,
+        to   = c("Aguascalientes", "Baja California",  "Baja California Sur", "Campeche", "Coahuila", "Colima", "Chiapas",
+                 "Chihuahua", "DF/CdMx",  "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México", "Michoacán",
+                 "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa",
+                 "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"),
+        warn_missing=FALSE
+    )
+    return(edo)
+}
