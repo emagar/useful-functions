@@ -19,19 +19,18 @@ xport <- function(e = NA, y = NA, dat = c("aymu1970-on.coalAgg.csv", "aymu1970-o
     edos <- c("ags", "bc", "bcs", "cam", "coa", "col", "cps", "cua", "df", "dgo", "gua", "gue", "hgo", "jal", "mex", "mic", "mor", "nay", "nl", "oax", "pue", "que", "qui", "san", "sin", "son", "tab", "tam", "tla", "ver", "yuc", "zac")
     estados <- c("Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Coahuila", "Colima", "Chiapas", "Chihuahua", "Distrito Federal/CDMX", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México (Estado de)", "Michoacán", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas")
     ##
-    ##
-#    e <- 2; y <- 2019; dat <- c("aymu1970-on.coalAgg.csv", "aymu1970-on.coalSplit.csv")[1] # debug
-    ## check if state requested in nim abbrev or full name
-    q <- e %in% c(edos, 1:32) # e==edon??
-    tmp <- grep(e, edos); if (length(tmp)>0) e <- grep(e, edos) # if char turn to num equivalent (edon)
-    ## this needs debuging
-    if (q==FALSE) e <- menu(choices = edos, title = "Select a state") # prompt for state
-    q <- y %in% as.numeric(names(table(dat$yr[dat$edon==e], useNA = "ifany")))
-    if (q==FALSE){                                                    # prompt for year
-        y <- menu(choices = names(table(dat$yr[dat$edon==e], useNA = "ifany")),
-                  title = "Choose municipal election year to export")
-        y <- as.numeric(names(table(dat$yr[dat$edon==e], useNA = "ifany"))[y])
-    }
+    #e <- 2; y <- 2019; dat <- c("aymu1970-on.coalAgg.csv", "aymu1970-on.coalSplit.csv")[1] # debug
+    ## ## check if state requested in nim abbrev or full name
+    ## q <- e %in% c(edos, 1:32) # e==edon??
+    ## tmp <- grep(e, edos); if (length(tmp)>0) e <- grep(e, edos) # if char turn to num equivalent (edon)
+    ## ## this needs debuging
+    ## if (q==FALSE) e <- menu(choices = edos, title = "Select a state") # prompt for state
+    ## q <- y %in% as.numeric(names(table(dat$yr[dat$edon==e], useNA = "ifany")))
+    ## if (q==FALSE){                                                    # prompt for year
+    ##     y <- menu(choices = names(table(dat$yr[dat$edon==e], useNA = "ifany")),
+    ##               title = "Choose municipal election year to export")
+    ##     y <- as.numeric(names(table(dat$yr[dat$edon==e], useNA = "ifany"))[y])
+    ## }
     #
     ## # set data directory here --- SHOULD BE DONE OUTSIDE FUNCTION
     ## dd <- "/home/eric/Desktop/MXelsCalendGovt/elecReturns/data/"
