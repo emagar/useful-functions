@@ -12,7 +12,7 @@ xport <- function(e = NA, y = NA, dat = c("aymu1970-on.coalAgg.csv", "aymu1970-o
     ## Function will take municipal data specified in dat
     ## and export it (or write it to file if write.to.file set to TRUE),
     ## re-arranging the data frame so that vote returns appear in columns named after the corresponding party/coalition.
-    ## Choose a state (eg. e=2 or e="bc" for Baja California) and a known electoral year (eg. y=2019) to output a dataframe
+    ## Choose a state number (eg. e=2 for Baja California) and a known electoral year (eg. y=2019) to output a dataframe
     ## with municipalities reported in each row. 
     ##
     ## state abbreviations
@@ -103,7 +103,7 @@ xport <- function(e = NA, y = NA, dat = c("aymu1970-on.coalAgg.csv", "aymu1970-o
     ##  manipulated data
     export <- cbind(dat1, vl, dat2)
     ##
-    if (write.to.file==FALSE) print(export)
+    if (write.to.file==FALSE) return(export)
     if (write.to.file==TRUE){
         write.csv(export, file = paste0("xport/", edos[e], y, "aymu.csv"), row.names = FALSE)
         ## Announce all went well
