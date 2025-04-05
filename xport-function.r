@@ -8,17 +8,19 @@
 ## Last revised: 4-apr-2025                                       ##
 ####################################################################
 
-xport <- function(e = NA, y = NA, dat = c("aymu1970-on.coalAgg.csv", "aymu1970-on.coalSplit.csv")[1], write.to.file=FALSE){
-    ## Function will take municipal data specified in dat
-    ## and export it (or write it to file if write.to.file set to TRUE),
+xport <- function(e = NA, y = NA, coal.agg = TRUE, write.to.file=FALSE){
+    ## Function will take municipal vote returns (with coalition aggregates if coal.agg is TRUE, split otherwise)
+    ## and export a single state-year (or write it to file if write.to.file set to TRUE),
     ## re-arranging the data frame so that vote returns appear in columns named after the corresponding party/coalition.
     ## Choose a state number (eg. e=2 for Baja California) and a known electoral year (eg. y=2019) to output a dataframe
     ## with municipalities reported in each row. 
     ##
-    ## state abbreviations
+    ## State abbreviations
     edos <- c("ags", "bc", "bcs", "cam", "coa", "col", "cps", "cua", "df", "dgo", "gua", "gue", "hgo", "jal", "mex", "mic", "mor", "nay", "nl", "oax", "pue", "que", "qui", "san", "sin", "son", "tab", "tam", "tla", "ver", "yuc", "zac")
+    ## State names
     estados <- c("Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Coahuila", "Colima", "Chiapas", "Chihuahua", "Distrito Federal/CDMX", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México (Estado de)", "Michoacán", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas")
     ##
+    ## THIS BLOCK TO ACCEPT STATE ABBREVIATIONS NEEDS DEBUGGING
     #e <- 2; y <- 2019; dat <- c("aymu1970-on.coalAgg.csv", "aymu1970-on.coalSplit.csv")[1] # debug
     ## ## check if state requested in nim abbrev or full name
     ## q <- e %in% c(edos, 1:32) # e==edon??
@@ -32,13 +34,11 @@ xport <- function(e = NA, y = NA, dat = c("aymu1970-on.coalAgg.csv", "aymu1970-o
     ##     y <- as.numeric(names(table(dat$yr[dat$edon==e], useNA = "ifany"))[y])
     ## }
     #
-    ## # set data directory here --- SHOULD BE DONE OUTSIDE FUNCTION
-    ## dd <- "/home/eric/Desktop/MXelsCalendGovt/elecReturns/data/"
-    ## # read data with coalition aggregates file
-    ## dat <- read.csv(file = paste(dd, "aymu1989-present.coalAgg.csv", sep = ""), stringsAsFactors = FALSE)
-    #
-    # read data (default is with split coalitions)
-    dat <- read.csv(file = dat, stringsAsFactors = FALSE)
+    ## Coalitions: aggregated or split?
+    if (coal.agg==TRUE)  file = c("aymu1970-on.coalAgg.csv", "aymu1970-on.coalSplit.csv")[1]
+    if (coal.agg==FALSE) file = c("aymu1970-on.coalAgg.csv", "aymu1970-on.coalSplit.csv")[2]
+    ## read data (default is with split coalitions)
+    dat <- read.csv(file = file, stringsAsFactors = FALSE)
     ##
     ## subset data to selection
     dat <- dat[dat$edon==e & dat$yr==y,]
