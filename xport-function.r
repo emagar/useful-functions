@@ -34,12 +34,16 @@ xport <- function(e = NA, y = NA, coal.agg = TRUE, write.to.file=FALSE){
     ##     y <- as.numeric(names(table(dat$yr[dat$edon==e], useNA = "ifany"))[y])
     ## }
     #
-    ## Coalitions: aggregated or split?
-    if (coal.agg==TRUE)  file = c("aymu1970-on.coalAgg.csv", "aymu1970-on.coalSplit.csv")[1]
-    if (coal.agg==FALSE) file = c("aymu1970-on.coalAgg.csv", "aymu1970-on.coalSplit.csv")[2]
-    ## read data (default is with split coalitions)
-    dat <- read.csv(file = file, stringsAsFactors = FALSE)
-    ##
+    ##select file according to function 
+    file_name <- ifelse(coal.agg == TRUE, "aymu1970-on.coalAgg.csv", "aymu1970-on.coalSplit.csv")
+    ##set path to file
+    pth <- paste0("https://raw.githubusercontent.com/emagar/elecRetrns/refs/heads/master/data/", file_name)
+    ##download and read file if it doesn't exist
+    if (!file.exists(file_name)) {
+      download.file(pth, destfile = file_name)
+    }
+    dat <- read.csv(file_name, stringsAsFactors = FALSE)
+    #
     ## subset data to selection
     dat <- dat[dat$edon==e & dat$yr==y,]
     ## check dim
