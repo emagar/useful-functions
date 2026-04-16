@@ -49,7 +49,7 @@ xport <- function(e = NA, y = NA, coal.agg = TRUE, write.to.file=FALSE){
     ## check dim
     if (nrow(dat)==0){
         print("No rows in data, did you select a proper electoral year?")
-        break
+        stop # break
     }
     ##
     ## extract votes and labels columns as separate objects
