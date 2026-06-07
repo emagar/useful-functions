@@ -6,6 +6,9 @@
 ## Author: Eric Magar emagar at itam dot mx                       ##
 ## Created:      13-mar-2021                                      ##
 ## Last revised: 4-apr-2025                                       ##
+##                                                                ##
+## Thanks to Rodrigo Santibáñez Razo for debugging this script    ##
+## in the Spring semester 2026.                                   ##
 ####################################################################
 
 xport <- function(e = NA, y = NA, coal.agg = TRUE, write.to.file=FALSE){
@@ -20,20 +23,6 @@ xport <- function(e = NA, y = NA, coal.agg = TRUE, write.to.file=FALSE){
     ## State names
     estados <- c("Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Coahuila", "Colima", "Chiapas", "Chihuahua", "Distrito Federal/CDMX", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México (Estado de)", "Michoacán", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas")
     ##
-    ## THIS BLOCK TO ACCEPT STATE ABBREVIATIONS NEEDS DEBUGGING
-    #e <- 2; y <- 2019; dat <- c("aymu1970-on.coalAgg.csv", "aymu1970-on.coalSplit.csv")[1] # debug
-    ## ## check if state requested in nim abbrev or full name
-    ## q <- e %in% c(edos, 1:32) # e==edon??
-    ## tmp <- grep(e, edos); if (length(tmp)>0) e <- grep(e, edos) # if char turn to num equivalent (edon)
-    ## ## this needs debuging
-    ## if (q==FALSE) e <- menu(choices = edos, title = "Select a state") # prompt for state
-    ## q <- y %in% as.numeric(names(table(dat$yr[dat$edon==e], useNA = "ifany")))
-    ## if (q==FALSE){                                                    # prompt for year
-    ##     y <- menu(choices = names(table(dat$yr[dat$edon==e], useNA = "ifany")),
-    ##               title = "Choose municipal election year to export")
-    ##     y <- as.numeric(names(table(dat$yr[dat$edon==e], useNA = "ifany"))[y])
-    ## }
-    #
     ##select file according to function 
     file_name <- ifelse(coal.agg == TRUE, "aymu1970-on.coalAgg.csv", "aymu1970-on.coalSplit.csv")
     ##set path to file
