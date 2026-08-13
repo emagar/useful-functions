@@ -1,33 +1,30 @@
-
-# Table of Contents
-
-1.  [Description](#org14181a3)
-2.  [Usage in R](#org99db7ad)
+- [Description](#org3be18e1)
+- [Usage in R](#orga95e6f6)
 
 
-<a id="org14181a3"></a>
+<a id="org3be18e1"></a>
 
 # Description
 
 Scripts containing (mostly) R code with functions useful for analysis
 
 
-<a id="org99db7ad"></a>
+<a id="orga95e6f6"></a>
 
 # Usage in R
 
 Set a path to either web or disk where source files reside
 
-``` R
-    pth <- ifelse (Sys.info()["user"] %in% c("eric", "magar"),
-              "~/Dropbox/data/useful-functions",
-              "https://raw.githubusercontent.com/emagar/useful-functions/master"
-    )
+```r-base
+pth <- ifelse (Sys.info()["user"] %in% c("eric", "magar"),
+          "~/Dropbox/data/useful-functions",
+          "https://raw.githubusercontent.com/emagar/useful-functions/master"
+)
 ```
 
-then read desired function
+then read desired function (eg. function `sortBy.r`)
 
-``` R
-    # Reads sortBy function
-    source( paste(pth, "sortBy.r", sep = "/") )
+```r-base
+# Reads sortBy function
+source( paste(pth, "sortBy.r", sep = "/") )
 ```

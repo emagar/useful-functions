@@ -10,7 +10,7 @@ pth <- ifelse (Sys.info()["user"] %in% c("eric", "magar"),
 )
 #+END_SRC
 
-then read desired function
+then read desired function (eg. function ~sortBy.r~)
 
 #+BEGIN_SRC r-base
 # Reads sortBy function
