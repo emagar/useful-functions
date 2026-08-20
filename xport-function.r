@@ -5,12 +5,10 @@
 ##                                                                ##
 ## Author: Eric Magar emagar at itam dot mx                       ##
 ## Created:      13-mar-2021                                      ##
-## Last revised: 4-apr-2025                                       ##
-## Local copy with verbosity improvements: 5-apr-2026             ##
-## Changes: Tier 2 (input validation + state abbreviation         ##
-##   support) and Tier 3 (diagnostic messages when no data found, ##
-##   cross-referencing resumen-haber-datos). Also fixes break bug ##
-##   and silent paste() on write.to.file success.                 ##
+## Last revised: 5-apr-2026                                       ##
+##                                                                ##
+## Thanks to Rodrigo Santibáñez Razo (@RazoR-28) for debugging    ##
+## this script in the Spring semester 2026.                       ##
 ####################################################################
 
 xport <- function(e = NA, y = NA, coal.agg = TRUE, write.to.file=FALSE){
@@ -23,7 +21,7 @@ xport <- function(e = NA, y = NA, coal.agg = TRUE, write.to.file=FALSE){
     ## State abbreviations
     edos <- c("ags", "bc", "bcs", "cam", "coa", "col", "cps", "cua", "df", "dgo", "gua", "gue", "hgo", "jal", "mex", "mic", "mor", "nay", "nl", "oax", "pue", "que", "qui", "san", "sin", "son", "tab", "tam", "tla", "ver", "yuc", "zac")
     ## State names
-    estados <- c("Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Coahuila", "Colima", "Chiapas", "Chihuahua", "Distrito Federal/CDMX", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "M\u00e9xico (Estado de)", "Michoac\u00e1n", "Morelos", "Nayarit", "Nuevo Le\u00f3n", "Oaxaca", "Puebla", "Quer\u00e9taro", "Quintana Roo", "San Luis Potos\u00ed", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucat\u00e1n", "Zacatecas")
+    estados <- c("Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Coahuila", "Colima", "Chiapas", "Chihuahua", "Distrito Federal/CDMX", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México (Estado de)", "Michoacán", "Morelos", "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas")
     ##
     ## Helper: format state list for display (used in error messages)
     .state_table <- function() {
@@ -126,8 +124,11 @@ xport <- function(e = NA, y = NA, coal.agg = TRUE, write.to.file=FALSE){
     ## ================================================================
     ## Load data
     ## ================================================================
+    ##select file according to function 
     file_name <- ifelse(coal.agg == TRUE, "aymu1970-on.coalAgg.csv", "aymu1970-on.coalSplit.csv")
+    ##set path to file
     pth <- paste0("https://raw.githubusercontent.com/emagar/elecRetrns/refs/heads/master/data/", file_name)
+    ##download and read file if it doesn't exist
     if (!file.exists(file_name)) {
         message("xport: Downloading ", file_name, " from GitHub...")
         download.file(pth, destfile = file_name)
@@ -167,6 +168,7 @@ xport <- function(e = NA, y = NA, coal.agg = TRUE, write.to.file=FALSE){
     ## ================================================================
     ## TIER 3: Diagnostic message when no data found
     ## ================================================================
+    ## check dim
     if (nrow(dat)==0){
         ## Gather context for a useful error message
         ## 1. What years exist in the dataset for this state?
